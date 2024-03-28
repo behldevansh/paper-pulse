@@ -1,5 +1,7 @@
 import { AuthBindings } from "@refinedev/core";
 import { API_URL, dataProvider } from "./data";
+// import { accessToken } from "./data/fetch-wrapper";
+
 // For demo purposes and to make it easier to test the app, you can use the following credentials
 export const authCredentials = {
   email: "michael.scott@dundermifflin.com",
@@ -13,9 +15,11 @@ export const authProvider: AuthBindings = {
       // dataProvider.custom is used to make a custom request to the GraphQL API
       // this will call dataProvider which will go through the fetchWrapper function
       const { data } = await dataProvider.custom({
-        url: API_URL,
+        url: `${API_URL}/login`,
+        // url: API_URL,
         method: "post",
         headers: {},
+        // headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
         meta: {
           variables: { email },
           // pass the email to see if the user exists and if so, return the accessToken
